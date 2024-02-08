@@ -3,4 +3,7 @@
 
 #include <stdio.h>
 
+char* readFile(char* filename);
+char* generateKey(int keyLength);
+
 #endif
