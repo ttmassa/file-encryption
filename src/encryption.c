@@ -50,10 +50,10 @@ char* generateKey(int keyLength) {
 
 char* stringToBinary(char* input) {
     size_t inputLength = strlen(input);
-    char* binaryResult = (char*)malloc(inputLength * 8 + 1); // +1 for null terminator
+    char* binaryResult = (char*)malloc(inputLength * 8 + 1);
     binaryResult[inputLength * 8] = '\0';
 
-    size_t index = 0; // Track the index in the binaryResult array
+    size_t index = 0; 
 
     while (*input) {
         int asciiCode = (int)(*input++);
