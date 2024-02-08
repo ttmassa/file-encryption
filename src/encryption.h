@@ -5,5 +5,6 @@
 
 char* readFile(char* filename);
 char* generateKey(int keyLength);
+char* stringToBinary(char* input);
 
 #endif

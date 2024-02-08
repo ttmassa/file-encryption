@@ -7,10 +7,12 @@ int main() {
     char* filename = "C://Users//timot//Documents//C//file-encryption//build//file.txt";
 
     char* fileContent = readFile(filename);
+    char* key = generateKey(strlen(fileContent));
+    char* binaryForm = stringToBinary(key);
 
-    printf("Random key:\n%s\n", generateKey(strlen(fileContent)));
+    printf("Binary form: %s", binaryForm);
 
-    free(fileContent);
+    free(binaryForm);
 
     return 0;
 }

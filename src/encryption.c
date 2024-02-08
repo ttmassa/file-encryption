@@ -35,7 +35,7 @@ char* readFile(char* filename) {
 }
 
 char* generateKey(int keyLength) {
-    char* key = (char*)malloc(keyLength * sizeof(char));
+    char* key = (char*)malloc(keyLength + 1 * sizeof(char));
 
     for (int i = 0; i < keyLength; i++) {
         //Generate a random integer in the printable characters ASCII range
@@ -43,7 +43,28 @@ char* generateKey(int keyLength) {
         key[i] = (char)randomAscii;
     }
 
-    key[keyLength] = '\0';
+    key[keyLength - 1] = '\0';
 
     return key;
 }
+
+char* stringToBinary(char* input) {
+    size_t inputLength = strlen(input);
+    char* binaryResult = (char*)malloc(inputLength * 8 + 1); // +1 for null terminator
+    binaryResult[inputLength * 8] = '\0';
+
+    size_t index = 0; // Track the index in the binaryResult array
+
+    while (*input) {
+        int asciiCode = (int)(*input++);
+
+        // Convert ASCII code to binary representation
+        for (int i = 7; i >= 0; i--) {
+            binaryResult[index++] = (asciiCode & (1 << i)) ? '1' : '0';
+        }
+    }
+
+    return binaryResult;
+}
+
+
