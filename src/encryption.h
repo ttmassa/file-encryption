@@ -6,5 +6,6 @@
 char* readFile(char* filename);
 char* generateKey(int keyLength);
 char* stringToBinary(char* input);
+FILE* encryptFile(char *file);
 
 #endif
