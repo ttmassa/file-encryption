@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
+#include <time.h>
 
 char* readFile(char* filename) {
     FILE* file = fopen(filename, "r");
@@ -38,8 +39,9 @@ char* generateKey(int keyLength) {
     char* key = (char*)malloc(keyLength + 1 * sizeof(char));
 
     for (int i = 0; i < keyLength; i++) {
+        srand(time(NULL));
         //Generate a random integer in the printable characters ASCII range
-        int randomAscii = rand() % (127 - 33) + 33;
+        int randomAscii = rand() % (126 - 32 + 1) + 32;
         key[i] = (char)randomAscii;
     }
 
@@ -121,17 +123,11 @@ void encryptFile(char *file) {
     //     exit(-1);
     // }
 
-    for (int i = 0; i < strlen(binaryKey); i++) {
-        if (binaryKey[i] == binaryText[i]) {
-            encryptedFileContent[i] = '0';
-        } else if (binaryKey[i] != binaryText[i]) {
-            encryptedFileContent[i] = '1';
-        } else {
-            encryptedFileContent[i] = '0';
-        }
+    for (int i = 0; i < strlen(binaryText); i++) {
+        encryptedFileContent[i] = binaryKey[i % strlen(binaryKey)] ^ binaryText[i] ? '1' : '0';
     }
 
-    FILE *encryptedFile = fopen("C:\\Users\\timot\\Documents\\C\\file-encryption\\build\\output.txt", "w");
+    FILE *encryptedFile = fopen("output.txt", "w");
 
     if (encryptedFile == NULL) {
         perror("Error opening file");
@@ -149,5 +145,4 @@ void encryptFile(char *file) {
     free(key);
     free(binaryKey);
     free(binaryText);
-    free(encryptedFileContent);
 }
