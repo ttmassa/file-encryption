@@ -112,6 +112,12 @@ char* xorComparaison(char* input, char* key) {
 }
 
 void encryptFile(char *file) {
+    /*
+        - Read the file
+        - Convert into binary forms the text and the key
+        - XORed the two of them
+        - Write the result into an new file
+    */
     char *fileContent = readFile(file);
     char* key = generateKey(strlen(fileContent));
     printf("%s\n", key);
@@ -158,6 +164,13 @@ void removeLastTwoChars(char* str) {
 }
 
 void decryptFile(char* file, char* key) {
+    /*
+        - Read the file
+        - XOR it with the key to get thr original binary form back
+        - Convert each octet into its corresponding character
+        - Write the result into a file
+    */
+
     char* fileContent = readFile(file);
     char* binaryKey = stringToBinary(key);
     printf("File content: %s\n", fileContent);
