@@ -111,7 +111,7 @@ char* xorComparaison(char* input, char* key) {
     return res;
 }
 
-void encryptFile(char *file) {
+void encryptFile(char *file, char* key) {
     /*
         - Read the file
         - Convert into binary forms the text and the key
@@ -119,7 +119,6 @@ void encryptFile(char *file) {
         - Write the result into an new file
     */
     char *fileContent = readFile(file);
-    char* key = generateKey(strlen(fileContent));
     printf("%s\n", key);
 
     if (fileContent == NULL || key == NULL || strlen(fileContent) == 0) {
@@ -172,9 +171,21 @@ void decryptFile(char* file, char* key) {
     */
 
     char* fileContent = readFile(file);
-    char* binaryKey = stringToBinary(key);
-    printf("File content: %s\n", fileContent);
+
+    if (fileContent == NULL) {
+        printf("Error reading file.");
+        exit(-1);
+    }
+
     int fileLength = strlen(fileContent);
+
+    char* binaryKey = stringToBinary(key);
+
+    if (binaryKey == NULL) {
+        printf("Error converting key");
+        exit(-1);
+    }
+
 
     // Proceed to the XOR comparison
     char *originalContent = xorComparaison(fileContent, binaryKey);

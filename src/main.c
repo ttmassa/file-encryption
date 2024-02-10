@@ -5,9 +5,10 @@
 
 int main() {
     char* filename = "C://Users//timot//Documents//C//file-encryption//output.txt";
-    char* key = "sHKfjTukXOWWXZsPrCCGgIQAGuqEdD";
-    
+    char* key = "neTRIPkvZgnggmajCJmqgiRHFapacdNJfjnCskZCktBZWDZzCUloyafBqlcNDHkYGxZqNNqc";
+
     decryptFile(filename, key);
+    
 
     return 0;
 }
