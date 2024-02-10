@@ -150,12 +150,22 @@ void encryptFile(char *file) {
     free(binaryText);
 }
 
+void removeLastTwoChars(char* str) {
+    int length = strlen(str);
+    if (length >= 2) {
+        str[length - 2] = '\0';
+    }
+}
+
 void decryptFile(char* file, char* key) {
     char* fileContent = readFile(file);
+    char* binaryKey = stringToBinary(key);
+    printf("File content: %s\n", fileContent);
     int fileLength = strlen(fileContent);
 
     // Proceed to the XOR comparison
-    char *originalContent = xorComparaison(fileContent, key);
+    char *originalContent = xorComparaison(fileContent, binaryKey);
+    printf("Original content: %s\n", originalContent);
 
     // Allocate memory for the decrypted content
     char* decryptedContent = malloc(fileLength / 8 + 1);
@@ -164,13 +174,15 @@ void decryptFile(char* file, char* key) {
     for (int i = 0; i < fileLength; i += 8) {
         char octet[9];
         strncpy(octet, &originalContent[i], 8);
-        octet[8] = '\0';  // Null-terminate the octet string
 
         // Convert the octet to a char and add it to the decrypted content
         decryptedContent[i / 8] = binaryToChar(octet);
-    }
+    } 
 
     decryptedContent[fileLength / 8] = '\0';  // Null-terminate the decrypted content
+    
+    // Remove the last 2 chars
+    removeLastTwoChars(decryptedContent);
 
     FILE *decryptedFile = fopen("input.txt", "w");
 
@@ -185,6 +197,5 @@ void decryptFile(char* file, char* key) {
 
     // Free the allocated memory
     free(fileContent);
-    free(originalContent);
     free(decryptedContent);
 }
