@@ -5,10 +5,12 @@
 
 char* readFile(char* filename);
 char* generateKey(int keyLength);
+
 char* stringToBinary(char* input);
 char* xorComparaison(char* input, char* key);
-FILE* encryptFile(char *file, char* key);
 char binaryToChar(char* octet);
+
+void encryptFile(char *file, char* key);
 void decryptFile(char* file, char* key);
 
 #endif
