@@ -5,7 +5,7 @@
 
 int main() {
     char* filename = "C://Users//timot//Documents//C//file-encryption//build//file.txt";
-
+    
     encryptFile(filename);
 
     return 0;
