@@ -42,22 +42,39 @@ void CreateMainWindow(HINSTANCE hInstance) {
 
     int buttonWidth = 100;
     int buttonHeight = 30;
-    int buttonX = (windowWidth - buttonWidth) / 2;
+    int encryptButtonX = (windowWidth - buttonWidth) / 4;
+    int decryptButtonX = (windowWidth - buttonWidth) / 4 * 3;
     int buttonY = (windowHeight - buttonHeight) / 2;
 
-    HWND button = CreateWindowW(
+    HWND encryptButton = CreateWindowW(
         L"BUTTON",
         L"Encrypt file",
         WS_VISIBLE | WS_CHILD | BS_PUSHBUTTON,
-        buttonX, buttonY, buttonWidth, buttonHeight,
+        encryptButtonX, buttonY, buttonWidth, buttonHeight,
         hwnd,
         (HMENU)1,
         hInstance,
         NULL
     );
 
-    if (!button) {
-        MessageBoxW(NULL, L"Button creation failed!", L"Error", MB_ICONERROR);
+    if (!encryptButton) {
+        MessageBoxW(NULL, L"Encrypt button creation failed!", L"Error", MB_ICONERROR);
+        ExitProcess(1);
+    }
+
+    HWND decryptButton = CreateWindowW(
+        L"BUTTON",
+        L"Decrypt file",
+        WS_VISIBLE | WS_CHILD | BS_PUSHBUTTON,
+        decryptButtonX, buttonY, buttonWidth, buttonHeight,
+        hwnd,
+        (HMENU)2,
+        hInstance,
+        NULL
+    );
+
+    if (!decryptButton) {
+        MessageBoxW(NULL, L"Decrypt button creation failed!", L"Error", MB_ICONERROR);
         ExitProcess(1);
     }
 
