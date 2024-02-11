@@ -47,7 +47,7 @@ void CreateMainWindow(HINSTANCE hInstance) {
 
     HWND button = CreateWindowW(
         L"BUTTON",
-        L"Click me",
+        L"Encrypt file",
         WS_VISIBLE | WS_CHILD | BS_PUSHBUTTON,
         buttonX, buttonY, buttonWidth, buttonHeight,
         hwnd,
