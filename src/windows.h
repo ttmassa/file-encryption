@@ -1,5 +1,8 @@
-#ifndef ENCRYPTION_H
-#define ENCRYPTION_H
+#ifndef WINDOWS_H
+#define WINDOWS_H
 
+#include <windows.h>
 
-#endif
+void CreateMainWindow(HINSTANCE hInstance);
+
+#endif // WINDOWS_H

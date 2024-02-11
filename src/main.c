@@ -1,15 +1,15 @@
 #include "encryption.h"
 #include "windows.h"
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
 
 int main() {
-    char* filename = "C://Users//timot//Documents//C//file-encryption//output.txt";
-    char* key = "neTRIPkvZgnggmajCJmqgiRHFapacdNJfjnCskZCktBZWDZzCUloyafBqlcNDHkYGxZqNNqc";
+    HINSTANCE hInstance = GetModuleHandle(NULL);
+    CreateMainWindow(hInstance);
 
-    decryptFile(filename, key);
-    
+    MSG msg = { 0 };
+    while (GetMessage(&msg, NULL, 0, 0)) {
+        TranslateMessage(&msg);
+        DispatchMessage(&msg);
+    }
 
     return 0;
 }
