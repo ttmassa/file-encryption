@@ -32,6 +32,33 @@ void CreateMainWindow(HINSTANCE hInstance) {
         ExitProcess(1);
     }
 
+    // Calculer les dimensions de la fenêtre
+    RECT rect;
+    GetClientRect(hwnd, &rect);
+    int windowWidth = rect.right - rect.left;
+    int windowHeight = rect.bottom - rect.top;
+
+    int buttonWidth = 100;
+    int buttonHeight = 30;
+    int buttonX = (windowWidth - buttonWidth) / 2;
+    int buttonY = (windowHeight - buttonHeight) / 2;
+
+    HWND button = CreateWindowW(
+        L"BUTTON",
+        L"Click me",
+        WS_VISIBLE | WS_CHILD | BS_PUSHBUTTON,
+        buttonX, buttonY, buttonWidth, buttonHeight,
+        hwnd,
+        (HMENU)1,
+        hInstance,
+        NULL
+    );
+
+    if (!button) {
+        MessageBoxW(NULL, L"Button creation failed!", L"Error", MB_ICONERROR);
+        ExitProcess(1);
+    }
+
     ShowWindow(hwnd, SW_SHOWDEFAULT);
     UpdateWindow(hwnd);
 }
