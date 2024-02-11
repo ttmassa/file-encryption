@@ -1,4 +1,5 @@
 #include "windows.h"
+#include <commdlg.h> // for OPENFILENAME and GetOpenFileName
 
 // Forward declaration of the Window Procedure
 LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
@@ -65,6 +66,30 @@ void CreateMainWindow(HINSTANCE hInstance) {
 
 LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam) {
     switch (uMsg) {
+    case WM_COMMAND:
+        if (LOWORD(wParam) == 1) { // if the command ID is 1 (the ID of the button)
+            OPENFILENAMEW ofn = { 0 };
+            WCHAR file[260] = { 0 }; // buffer to store the file path
+
+            // Initialize OPENFILENAME
+            ofn.lStructSize = sizeof(ofn);
+            ofn.hwndOwner = hwnd;
+            ofn.lpstrFile = file;
+            ofn.nMaxFile = sizeof(file) / sizeof(WCHAR);
+            ofn.lpstrFilter = L"All\0*.*\0Text\0*.TXT\0";
+            ofn.nFilterIndex = 1;
+            ofn.lpstrFileTitle = NULL;
+            ofn.nMaxFileTitle = 0;
+            ofn.lpstrInitialDir = NULL;
+            ofn.Flags = OFN_PATHMUSTEXIST | OFN_FILEMUSTEXIST;
+
+            // Display the Open dialog box.
+            if (GetOpenFileNameW(&ofn)) {
+                // file contains the path of the selected file
+                MessageBoxW(NULL, file, L"File Selected", MB_OK);
+            }
+        }
+        break;
     case WM_DESTROY:
         PostQuitMessage(0);
         break;

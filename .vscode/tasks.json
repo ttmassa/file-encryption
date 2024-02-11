@@ -13,6 +13,7 @@
                 "${workspaceFolder}/src/windows.c",
                 "-o",
                 "${workspaceFolder}/build/encrypter_manager.exe",
+                "-lcomdlg32" // For the file dialog window
             ],
             "options": {
                 "cwd": "${workspaceFolder}"
