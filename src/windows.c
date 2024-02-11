@@ -1,4 +1,5 @@
 #include "windows.h"
+#include "encryption.h"
 #include <commdlg.h> // for OPENFILENAME and GetOpenFileName
 
 // Forward declaration of the Window Procedure
@@ -86,7 +87,9 @@ LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam) 
             // Display the Open dialog box.
             if (GetOpenFileNameW(&ofn)) {
                 // file contains the path of the selected file
-                MessageBoxW(NULL, file, L"File Selected", MB_OK);
+                char filePath[MAX_PATH];
+                WideCharToMultiByte(CP_UTF8, 0, file, -1, filePath, MAX_PATH, NULL, NULL);
+                encryptFileWithoutKey(filePath);
             }
         }
         break;

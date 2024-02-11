@@ -10,6 +10,7 @@ char* stringToBinary(char* input);
 char* xorComparaison(char* input, char* key);
 char binaryToChar(char* octet);
 
+void encryptFileWithoutKey(char* file);
 void encryptFile(char *file, char* key);
 void decryptFile(char* file, char* key);
 

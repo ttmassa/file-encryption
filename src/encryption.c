@@ -155,6 +155,57 @@ void encryptFile(char *file, char* key) {
     free(binaryText);
 }
 
+void encryptFileWithoutKey(char *file) {
+    /*
+        - Read the file
+        - Convert into binary forms the text and the key
+        - XORed the two of them
+        - Write the result into an new file
+    */
+    char *fileContent = readFile(file);
+
+    if (fileContent == NULL) {
+        printf("Error reading file.");
+        exit(-1);
+    }
+    
+    char *key = generateKey(strlen(fileContent));
+    printf("%s\n", key);
+
+    if (fileContent == NULL || key == NULL || strlen(fileContent) == 0) {
+        printf("Error generating key or fileContent.");
+        exit(-1);
+    }
+    
+
+
+    char *binaryKey = stringToBinary(key);
+    char *binaryText = stringToBinary(fileContent);
+
+    // Proceed to the XOR comparaison
+    char *encryptedFileContent = xorComparaison(binaryText, binaryKey);
+    printf("%s", encryptedFileContent);
+
+    FILE *encryptedFile = fopen("output.txt", "w");
+
+    if (encryptedFile == NULL) {
+        perror("Error opening file");
+        exit(-1);
+    }
+
+    fprintf(encryptedFile, "%s", encryptedFileContent);
+
+    fprintf(encryptedFile, "\n");
+
+    fclose(encryptedFile);
+
+    // Free allocated memory
+    free(fileContent);
+    free(key);
+    free(binaryKey);
+    free(binaryText);
+}
+
 void removeLastTwoChars(char* str) {
     int length = strlen(str);
     if (length >= 2) {
