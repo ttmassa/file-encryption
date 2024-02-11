@@ -85,7 +85,7 @@ void CreateMainWindow(HINSTANCE hInstance) {
 LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam) {
     switch (uMsg) {
     case WM_COMMAND:
-        if (LOWORD(wParam) == 1) { // if the command ID is 1 (the ID of the button)
+        if (LOWORD(wParam) == 1 || LOWORD(wParam) == 2) { // if the command ID is 1 (encrypt button) or 2 (decrypt button)
             OPENFILENAMEW ofn = { 0 };
             WCHAR file[260] = { 0 }; // buffer to store the file path
 
@@ -106,7 +106,12 @@ LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam) 
                 // file contains the path of the selected file
                 char filePath[MAX_PATH];
                 WideCharToMultiByte(CP_UTF8, 0, file, -1, filePath, MAX_PATH, NULL, NULL);
-                encryptFileWithoutKey(filePath);
+                if (LOWORD(wParam) == 1) {
+                    encryptFileWithoutKey(filePath);
+                } else if (LOWORD(wParam) == 2) {
+                    char* key = generateKey(strlen(filePath));
+                    decryptFile(filePath, key);
+                }
             }
         }
         break;
