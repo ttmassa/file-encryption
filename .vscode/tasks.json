@@ -11,7 +11,7 @@
                 "${workspaceFolder}/src/main.c",
                 "${workspaceFolder}/src/encryption.c",
                 "-o",
-                "${workspaceFolder}/build/encrypter_manager.exe"
+                "${workspaceFolder}/build/encrypter_manager.exe",
             ],
             "options": {
                 "cwd": "${workspaceFolder}"
