@@ -1,6 +1,4 @@
-#include "encryption.h"
-#include "windows.h"
-#include "db_manager.h"
+#include "main.h"
 
 int main() {
     initializeDb();
