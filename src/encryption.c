@@ -2,6 +2,7 @@
 #include <string.h>
 #include <stdlib.h>
 #include <time.h>
+#include "db_manager.h"
 
 char* readFile(char* filename) {
     FILE* file = fopen(filename, "r");
@@ -177,7 +178,7 @@ void encryptFileWithoutKey(char *file) {
         exit(-1);
     }
     
-
+    storeFile(file, key);
 
     char *binaryKey = stringToBinary(key);
     char *binaryText = stringToBinary(fileContent);

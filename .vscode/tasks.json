@@ -11,9 +11,11 @@
                 "${workspaceFolder}/src/main.c",
                 "${workspaceFolder}/src/encryption.c",
                 "${workspaceFolder}/src/windows.c",
+                "${workspaceFolder}/src/db_manager.c",
                 "-o",
                 "${workspaceFolder}/build/encrypter_manager.exe",
-                "-lcomdlg32" // For the file dialog window
+                "-lcomdlg32", // For the file dialog window
+                "-lsqlite3" // For SQLite3 
             ],
             "options": {
                 "cwd": "${workspaceFolder}"

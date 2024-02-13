@@ -1,5 +1,6 @@
 #include "windows.h"
 #include "encryption.h"
+#include "db_manager.h"
 #include <commdlg.h> // for OPENFILENAME and GetOpenFileName
 
 // Forward declaration of the Window Procedure

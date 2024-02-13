@@ -3,4 +3,7 @@
 
 #include <sqlite3.h>
 
+void storeFile(const char* fileName, char* key);
+void initializeDb();
+
 #endif // DB_MANAGER_H
