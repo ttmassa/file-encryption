@@ -20,7 +20,7 @@ void storeFile(const char* fileName, const char* key) {
     }
 
     char sql[256];
-    sprintf(sql, "INSERT INTO KEYS(Name, Key) VALUES('%s', '%s')", fileName, key);
+    sprintf(sql, "INSERT OR REPLACE INTO KEYS(Name, Key) VALUES('%s', '%s')", fileName, key);
     rc = sqlite3_exec(db, sql, 0, 0, &err_msg);
 
     if (rc != SQLITE_OK) {
@@ -73,7 +73,7 @@ void initializeDb() {
         return;
     }
 
-    char *sql = "CREATE TABLE IF NOT EXISTS KEYS(Id INTEGER PRIMARY KEY, Name TEXT UNIQUE,Key TEXT);";
+    char *sql = "CREATE TABLE IF NOT EXISTS KEYS(Id INTEGER PRIMARY KEY, Name TEXT UNIQUE, Key TEXT);";
 
     rc = sqlite3_exec(db, sql, 0, 0, &err_msg);
 
