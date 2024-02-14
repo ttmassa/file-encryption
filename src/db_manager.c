@@ -1,4 +1,5 @@
 #include <sqlite3.h>
+#include <string.h>
 #include <stdio.h>
 
 static int callback(void *key, int argc, char **argv, char **azColName){
