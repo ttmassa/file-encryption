@@ -12,7 +12,7 @@ void storeFile(const char* fileName, const char* key) {
     sqlite3 *db;
     char *err_msg = 0;
 
-    int rc  = sqlite3_open("C:/Users/timot/Documents/C/file-encryption/test.db", &db);
+    int rc  = sqlite3_open("../database/test.db", &db);
 
     if (rc != SQLITE_OK) {
         fprintf(stderr, "Cannot open database: %s\n", sqlite3_errmsg(db));
@@ -37,7 +37,7 @@ char* getKey(char* fileName) {
     char *err_msg = 0;
     char* key = NULL;
 
-    int rc  = sqlite3_open("C:/Users/timot/Documents/C/file-encryption/test.db", &db);
+    int rc  = sqlite3_open("../database/test.db", &db);
 
     if (rc != SQLITE_OK) {
         fprintf(stderr, "Cannot open database: %s\n", sqlite3_errmsg(db));
@@ -65,7 +65,7 @@ void initializeDb() {
     sqlite3 *db;
     char *err_msg = 0;
 
-    int rc  = sqlite3_open("C:/Users/timot/Documents/C/file-encryption/test.db", &db);
+    int rc  = sqlite3_open("./database/test.db", &db);
 
     if (rc != SQLITE_OK) {
         fprintf(stderr, "Cannot open database: %s\n", sqlite3_errmsg(db));

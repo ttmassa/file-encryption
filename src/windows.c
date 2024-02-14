@@ -145,9 +145,6 @@ LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam) 
                     char* key = getKey(fileName);
                     decryptFile(filePath, key);
                 }
-
-                // Hide the Edit control
-                ShowWindow(hEdit, SW_HIDE);
             }
         }
         break;
