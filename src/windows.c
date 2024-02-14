@@ -142,7 +142,7 @@ LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam) 
                 if (LOWORD(wParam) == 1) {
                     encryptFileWithoutKey(filePath, fileName);
                 } else if (LOWORD(wParam) == 2) {
-                    char* key = generateKey(strlen(filePath));
+                    char* key = getKey(fileName);
                     decryptFile(filePath, key);
                 }
 
