@@ -6,6 +6,8 @@
 // Forward declaration of the Window Procedure
 LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
 
+HWND hEdit;
+
 void CreateMainWindow(HINSTANCE hInstance) {
     WNDCLASSW wc = { 0 };
     wc.lpfnWndProc = WindowProc;
@@ -79,6 +81,28 @@ void CreateMainWindow(HINSTANCE hInstance) {
         ExitProcess(1);
     }
 
+    int textFieldWidth = 200;
+    int textFieldHeight = 25;
+    int textFieldX = (windowWidth - textFieldWidth) / 2;
+    int textFieldY = (windowWidth - textFieldWidth) / 3;
+
+    hEdit = CreateWindowExW(
+        WS_EX_CLIENTEDGE,
+        L"EDIT",
+        L"",
+        WS_VISIBLE | WS_CHILD | ES_AUTOHSCROLL,
+        textFieldX, textFieldY, textFieldWidth, textFieldHeight,
+        hwnd,
+        (HMENU)3,
+        hInstance,
+        NULL
+    );
+
+    if (!hEdit) {
+        MessageBoxW(NULL, L"Edit control creation failed!", L"Error", MB_ICONERROR);
+        ExitProcess(1);
+    }
+
     ShowWindow(hwnd, SW_SHOWDEFAULT);
     UpdateWindow(hwnd);
 }
@@ -104,15 +128,26 @@ LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam) 
 
             // Display the Open dialog box.
             if (GetOpenFileNameW(&ofn)) {
+                // Get the text from the Edit control
+                WCHAR name[260];
+                GetWindowTextW(hEdit, name, 260);
+
+                // Convert the name to a multibyte string if necessary
+                char fileName[260];
+                WideCharToMultiByte(CP_UTF8, 0, name, -1, fileName, 260, NULL, NULL);
+
                 // file contains the path of the selected file
                 char filePath[MAX_PATH];
                 WideCharToMultiByte(CP_UTF8, 0, file, -1, filePath, MAX_PATH, NULL, NULL);
                 if (LOWORD(wParam) == 1) {
-                    encryptFileWithoutKey(filePath);
+                    encryptFileWithoutKey(filePath, fileName);
                 } else if (LOWORD(wParam) == 2) {
                     char* key = generateKey(strlen(filePath));
                     decryptFile(filePath, key);
                 }
+
+                // Hide the Edit control
+                ShowWindow(hEdit, SW_HIDE);
             }
         }
         break;

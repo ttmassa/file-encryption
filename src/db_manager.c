@@ -62,7 +62,7 @@ void initializeDb() {
         return;
     }
 
-    char *sql = "CREATE TABLE IF NOT EXISTS KEYS(Id INTEGER PRIMARY KEY, Filepath TEXT,Key TEXT);";
+    char *sql = "CREATE TABLE IF NOT EXISTS KEYS(Id INTEGER PRIMARY KEY, Filepath TEXT UNIQUE,Key TEXT);";
 
     rc = sqlite3_exec(db, sql, 0, 0, &err_msg);
 

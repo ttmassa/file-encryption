@@ -156,7 +156,7 @@ void encryptFile(char *file, char* key) {
     free(binaryText);
 }
 
-void encryptFileWithoutKey(char *file) {
+void encryptFileWithoutKey(char *file, char* name) {
     /*
         - Read the file
         - Convert into binary forms the text and the key
@@ -178,7 +178,7 @@ void encryptFileWithoutKey(char *file) {
         exit(-1);
     }
     
-    storeFile(file, key);
+    storeFile(name, key);
 
     char *binaryKey = stringToBinary(key);
     char *binaryText = stringToBinary(fileContent);
