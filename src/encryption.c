@@ -171,7 +171,6 @@ void encryptFileWithoutKey(char *file, char* name) {
     }
     
     char *key = generateKey(strlen(fileContent));
-    printf("%s\n", key);
 
     if (fileContent == NULL || key == NULL || strlen(fileContent) == 0) {
         printf("Error generating key or fileContent.");
@@ -185,7 +184,6 @@ void encryptFileWithoutKey(char *file, char* name) {
 
     // Proceed to the XOR comparaison
     char *encryptedFileContent = xorComparaison(binaryText, binaryKey);
-    printf("%s", encryptedFileContent);
 
     FILE *encryptedFile = fopen("output.txt", "w");
 
@@ -241,7 +239,6 @@ void decryptFile(char* file, char* key) {
 
     // Proceed to the XOR comparison
     char *originalContent = xorComparaison(fileContent, binaryKey);
-    printf("Original content: %s\n", originalContent);
 
     // Allocate memory for the decrypted content
     char* decryptedContent = malloc(fileLength / 8 + 1);
