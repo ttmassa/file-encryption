@@ -60,6 +60,9 @@ void CreateMainWindow(HINSTANCE hInstance) {
         NULL
     );
 
+    //Disable the encrypt button by default
+    EnableWindow(encryptButton, FALSE);
+
     if (!encryptButton) {
         MessageBoxW(NULL, L"Encrypt button creation failed!", L"Error", MB_ICONERROR);
         ExitProcess(1);
@@ -75,6 +78,9 @@ void CreateMainWindow(HINSTANCE hInstance) {
         hInstance,
         NULL
     );
+
+    //Disable the decrypt button by default
+    EnableWindow(decryptButton, FALSE);
 
     if (!decryptButton) {
         MessageBoxW(NULL, L"Decrypt button creation failed!", L"Error", MB_ICONERROR);
@@ -110,7 +116,11 @@ void CreateMainWindow(HINSTANCE hInstance) {
 LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam) {
     switch (uMsg) {
     case WM_COMMAND:
-        if (LOWORD(wParam) == 1 || LOWORD(wParam) == 2) { // if the command ID is 1 (encrypt button) or 2 (decrypt button)
+        if (HIWORD(wParam) == EN_CHANGE && LOWORD(wParam) == 3) { // if the notification code is EN_CHANGE and the ID of the control is 3 (hEdit)
+            int length = GetWindowTextLength(hEdit);
+            EnableWindow(GetDlgItem(hwnd, 1), length > 0); // enable or disable the encrypt button
+            EnableWindow(GetDlgItem(hwnd, 2), length > 0); // enable or disable the decrypt button
+        } else if (LOWORD(wParam) == 1 || LOWORD(wParam) == 2) { // if the command ID is 1 (encrypt button) or 2 (decrypt button)
             OPENFILENAMEW ofn = { 0 };
             WCHAR file[260] = { 0 }; // buffer to store the file path
 
