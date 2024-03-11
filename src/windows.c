@@ -20,12 +20,15 @@ void CreateMainWindow(HINSTANCE hInstance) {
         ExitProcess(1);
     }
 
+    int screenWidth = GetSystemMetrics(SM_CXSCREEN);
+    int screenHeight = GetSystemMetrics(SM_CYSCREEN);
+
     HWND hwnd = CreateWindowExW(
         0,
         L"MainWindowClass",
         L"Simple Window",
         WS_OVERLAPPEDWINDOW,
-        CW_USEDEFAULT, CW_USEDEFAULT, 500, 400,
+        CW_USEDEFAULT, CW_USEDEFAULT, screenWidth, screenHeight,
         NULL,
         NULL,
         hInstance,
