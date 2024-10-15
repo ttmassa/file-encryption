@@ -13,7 +13,7 @@ void storeFile(const char* fileName, const char* key) {
     char *err_msg = 0;
     sqlite3_stmt *stmt;
 
-    int rc  = sqlite3_open("../database/test.db", &db);
+    int rc  = sqlite3_open("/database/test.db", &db);
 
     if (rc != SQLITE_OK) {
         fprintf(stderr, "Cannot open database: %s\n", sqlite3_errmsg(db));
@@ -47,7 +47,7 @@ char* getKey(char* fileName) {
     char* key = NULL;
     sqlite3_stmt *stmt;
 
-    int rc  = sqlite3_open("../database/test.db", &db);
+    int rc  = sqlite3_open("/database/test.db", &db);
 
     if (rc != SQLITE_OK) {
         fprintf(stderr, "Cannot open database: %s\n", sqlite3_errmsg(db));
@@ -82,7 +82,7 @@ void initializeDb() {
     sqlite3 *db;
     char *err_msg = 0;
 
-    int rc  = sqlite3_open("./database/test.db", &db);
+    int rc  = sqlite3_open("/database/test.db", &db);
 
     if (rc != SQLITE_OK) {
         fprintf(stderr, "Cannot open database: %s\n", sqlite3_errmsg(db));
